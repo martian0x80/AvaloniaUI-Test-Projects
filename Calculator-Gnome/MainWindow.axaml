@@ -1,0 +1,278 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="200"
+        MaxHeight="600" MaxWidth="450"
+        MinHeight="550" MinWidth="400"
+        x:Class="Calculator.MainWindow"
+        Title="Arithmetic">
+<Grid ShowGridLines="True">
+        <Grid.Resources>
+                <Image x:Key="Backspace" Source="assets/backspace.png"></Image>
+        </Grid.Resources>
+        <Grid.MinHeight>550</Grid.MinHeight>
+        <Grid.MaxHeight>600</Grid.MaxHeight>
+        <Grid.MinWidth>400</Grid.MinWidth>
+        <Grid.MaxWidth>550</Grid.MaxWidth>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.5*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+                <TextBox Text="sdhjjhvjhvj"
+                           FontSize="25"
+                           VerticalAlignment="Center"
+                           Padding="10"
+                           IsReadOnly="True"/>
+                
+        </StackPanel>
+        <NumericUpDown Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Name="InputNumericUpDown"
+                 FontSize="25"
+                 VerticalAlignment="Center"
+                 Padding="10"
+                 BorderThickness="0"
+                 VerticalContentAlignment="Center"
+                 ShowButtonSpinner="False"
+                 AllowSpin="False"
+                 FlowDirection="LeftToRight"
+                 Height="120"
+                 LostFocus="InputElement_OnLostFocus"/>
+        <Button Grid.Row="2" Grid.Column="0"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10"
+                Content="{StaticResource Backspace}"
+                Click="Button_OnClick"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="("
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10"
+                Click="Button_OnClick"/>
+        <Button Grid.Row="2" Grid.Column="2" Content=")"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10"
+                Click="Button_OnClick"/>
+        <Button Grid.Row="2" Grid.Column="3" Content="mod"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" 
+                Click="Button_OnClick"/>
+        <Button Grid.Row="2" Grid.Column="4" Content="&#960;"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="3" Grid.Column="0" Content="7"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="3" Grid.Column="1" Content="8"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="3" Grid.Column="2" Content="9"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="3" Grid.Column="3" Content="&#247;"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="3" Grid.Column="4" Content="&#8730;"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="4" Grid.Column="0" Content="4"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="4" Grid.Column="1" Content="5"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="4" Grid.Column="2" Content="6"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="4" Grid.Column="3" Content="&#215;"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="4" Grid.Column="4" Content="x&#178;"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="5" Grid.Column="0" Content="1"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="5" Grid.Column="1" Content="2"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="5" Grid.Column="2" Content="3"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="5" Grid.Column="3" Content="+"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="5" Grid.Column="4" Content="=" Grid.RowSpan="2"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="6" Grid.Column="0" Content="0"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="6" Grid.Column="1" Content="."
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="6" Grid.Column="2" Content="%"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+        <Button Grid.Row="6" Grid.Column="3" Content="-"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                FontSize="20"
+                BorderThickness="10" />
+    </Grid>
+    <!--<Panel
+        MinHeight="200"
+        MaxHeight="250"
+        MinWidth="300"
+        MaxWidth="350">
+        <TextPresenter
+            Text="Number:"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            Margin="0, 20, 0, 50"/>
+        <NumericUpDown
+            Name="num1"
+            Height="25"
+            Width="150"
+            ButtonSpinnerLocation="Right"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Margin="0, 0, 0, 70"
+            ValueChanged="Num_OnValueChanged"
+        />
+        <TextPresenter
+            Text="Number:"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Margin="0, 20, 90, 50"/>
+        <NumericUpDown
+            Name="num2"
+            Height="25"
+            Width="150"
+            ButtonSpinnerLocation="Right"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="0, 0, 0, 70"
+            ValueChanged="Num_OnValueChanged"
+            />
+        <TextBlock
+            Name="Answer"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Height="50"
+            Width="50"
+            Text="0"
+            ClipToBounds="True"
+            />
+        <Button Name="Button1" 
+                Click="Button_OnClick" 
+                CornerRadius="15" 
+                HorizontalAlignment="Stretch" 
+                HorizontalContentAlignment="Center"
+                VerticalAlignment="Bottom">Calculate</Button>
+    </Panel>-->
+</Window>
