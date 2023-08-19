@@ -27,13 +27,31 @@ public partial class MainWindow : Window
     }*/
     private void InputElement_OnLostFocus(object? sender, RoutedEventArgs e)
     {
-        
-        InputNumericUpDown.Focus();
+        InputTextBox.Focus();
     }
     
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        InputTextBox.Focus();
+        var button = (sender as Button)!;
+        if (button.Name == "ButtonXSquare")
+        {
+            InputTextBox.Text += (sender as Button)?.Tag?.ToString();
+        }
+        else
+        {
+            InputTextBox.Text += (sender as Button)?.Content?.ToString();
+        }
+    }
+
+    private void InputTextBox_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+//        throw new System.NotImplementedException();
+    }
+
+    private void Button_OnClickBackSpace(object? sender, RoutedEventArgs e)
+    {
+//        throw new System.NotImplementedException();
     }
 }
