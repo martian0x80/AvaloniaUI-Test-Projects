@@ -7,10 +7,10 @@
         MinHeight="550" MinWidth="400"
         x:Class="Calculator.MainWindow"
         Title="Calculator">
+<Window.Resources>
+        <Image x:Key="Backspace" Source="assets/backspace.png"></Image>
+</Window.Resources>
 <Grid ShowGridLines="True">
-        <Grid.Resources>
-                <Image x:Key="Backspace" Source="assets/backspace.png"></Image>
-        </Grid.Resources>
         <Grid.MinHeight>550</Grid.MinHeight>
         <Grid.MaxHeight>600</Grid.MaxHeight>
         <Grid.MinWidth>400</Grid.MinWidth>
@@ -32,17 +32,17 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
-                <TextBox Text="sdhjjhvjhvj"
-                           FontSize="23"
-                           VerticalAlignment="Center"
-                           Padding="10"
-                           IsReadOnly="True"/>
-                <TextBox Text="sdhjjhvjhvj"
+                <TextBox Text="sdhjjhvjhvj" Name="ResultBox3"
                          FontSize="23"
                          VerticalAlignment="Center"
                          Padding="10"
                          IsReadOnly="True"/>
-                <TextBox Text="sdhjjhvjhvj"
+                <TextBox Text="sdhjjhvjhvj" Name="ResultBox2"
+                         FontSize="23"
+                         VerticalAlignment="Center"
+                         Padding="10"
+                         IsReadOnly="True"/>
+                <TextBox Text="sdhjjhvjhvj" Name="ResultBox1"
                          FontSize="23"
                          VerticalAlignment="Center"
                          Padding="10"
@@ -59,15 +59,18 @@
                                LostFocus="InputElement_OnLostFocus"
                                MaxHeight="120"
                                MinHeight="90" 
-                               TextChanged="InputTextBox_OnTextChanged"/>
+                               Foreground="White"
+                               />
                 <TextBlock Name="MalformedInput"
                            Text="Malformed Input"
                            TextAlignment="End"
                            Margin="10,-1"
                            IsVisible="False"
+                           Foreground="Red"
+                           FontSize="15"
                            />
         </StackPanel>
-        <Button Grid.Row="2" Grid.Column="0" Name="BackButton"
+       <Button Grid.Row="2" Grid.Column="0" Name="BackButton"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
@@ -75,7 +78,8 @@
                 FontSize="20"
                 BorderThickness="10"
                 Content="{StaticResource Backspace}"
-                Click="Button_OnClickBackSpace"/>
+                Click="Button_OnClickBackSpace"
+                Holding="BackButton_OnHolding"/>
         <Button Grid.Row="2" Grid.Column="1" Content="("
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
@@ -92,14 +96,15 @@
                 FontSize="20"
                 BorderThickness="10"
                 Click="Button_OnClick"/>
-        <Button Grid.Row="2" Grid.Column="3" Content="mod"
+        <Button Grid.Row="2" Grid.Column="3" Content="mod" Name="ModButton"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 FontSize="20"
                 BorderThickness="10" 
-                Click="Button_OnClick"/>
+                Click="Button_OnClickMod"
+                Tag="mod()"/>
         <Button Grid.Row="2" Grid.Column="4" Content="&#960;"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
@@ -107,7 +112,8 @@
                 VerticalContentAlignment="Center"
                 FontSize="20"
                 BorderThickness="10"
-                Click="Button_OnClick" />
+                Click="Button_OnClick"
+                Tag="Pi"/>
         <Button Grid.Row="3" Grid.Column="0" Content="7"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
@@ -132,14 +138,15 @@
                 FontSize="20"
                 BorderThickness="10" 
                 Click="Button_OnClick"/>
-        <Button Grid.Row="3" Grid.Column="3" Content="&#247;"
+        <Button Grid.Row="3" Grid.Column="3" Content="&#247;" Name="ButtonDivide"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 FontSize="20"
                 BorderThickness="10" 
-                Click="Button_OnClick"/>
+                Click="Button_OnClick"
+                Tag="/"/>
         <Button Grid.Row="3" Grid.Column="4" Content="&#8730;"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
@@ -172,14 +179,15 @@
                 FontSize="20"
                 BorderThickness="10" 
                 Click="Button_OnClick"/>
-        <Button Grid.Row="4" Grid.Column="3" Content="&#215;"
+        <Button Grid.Row="4" Grid.Column="3" Content="&#215;" Name="ButtonMultiply"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 FontSize="20"
                 BorderThickness="10" 
-                Click="Button_OnClick"/>
+                Click="Button_OnClick"
+                Tag="*"/>
         <Button Grid.Row="4" Grid.Column="4" Content="x&#178;" Name="ButtonXSquare"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
@@ -227,7 +235,8 @@
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 FontSize="20"
-                BorderThickness="10" />
+                BorderThickness="10" 
+                Click="CalculateButton_OnClick"/>
         <Button Grid.Row="6" Grid.Column="0" Content="0"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
