@@ -79,7 +79,8 @@
                 BorderThickness="10"
                 Content="{StaticResource Backspace}"
                 Click="Button_OnClickBackSpace"
-                Holding="BackButton_OnHolding"/>
+                DoubleTapped="BackButton_OnDoubleTapped"
+                 />
         <Button Grid.Row="2" Grid.Column="1" Content="("
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
@@ -104,7 +105,7 @@
                 FontSize="20"
                 BorderThickness="10" 
                 Click="Button_OnClickMod"
-                Tag="mod()"/>
+                Tag=" mod "/>
         <Button Grid.Row="2" Grid.Column="4" Content="&#960;"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
