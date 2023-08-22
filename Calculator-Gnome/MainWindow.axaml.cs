@@ -11,9 +11,9 @@ namespace Calculator
 {
     public partial class MainWindow : Window
     {
-        private Dictionary<char, string> UnicodeOpsMap = new Dictionary<char, string>()
+        private readonly Dictionary<char, string> _unicodeOpsMap = new Dictionary<char, string>()
         {
-            {(char)960, "Pi"},
+            {(char)960, "[Pi]"},
             {(char)247, "/"},
             {(char)215, "*"},
             {(char)178, "**2"},
@@ -24,49 +24,95 @@ namespace Calculator
             InputTextBox.Focus();
         }
 
+        private void ChangeCaretIndexPosToEndOfInputText(int offset = 0)
+        {
+            InputTextBox.CaretIndex = InputTextBox.Text?.Length > offset ? InputTextBox.Text.Length - offset : 0;
+        }
+
+        private void ChangeCaretIndexPosRelativeToItself(int fOffset = 0)
+        {
+            InputTextBox.CaretIndex += fOffset;
+
+        }
+
         private void InputElement_OnLostFocus(object? sender, RoutedEventArgs e)
         {
             InputTextBox.Focus();
         }
 
-
+// This took me a lifetime to figure out
         private void Button_OnClick(object? sender, RoutedEventArgs e)
         {
             MalformedInput.IsVisible = false;
             InputTextBox.Focus();
-            var button = (sender as Button)!;
+            var button = (sender as Button);
 
-            if (button.Name == "ButtonXSquare")
+            if (button?.Name == "ButtonXSquare")
             {
-                InputTextBox.Text += (sender as Button)?.Tag?.ToString();
+//                InputTextBox.Text += (sender as Button)?.Tag?.ToString();
+                if (InputTextBox.CaretIndex < InputTextBox.Text?.Length)
+                {
+                    InputTextBox.Text = InputTextBox.Text?.Insert(InputTextBox.CaretIndex, (sender as Button)?.Tag?.ToString() ?? string.Empty);
+                }
+                else
+                {
+                    InputTextBox.Text += (sender as Button)?.Tag?.ToString();
+                }
             }
             else
             {
-                InputTextBox.Text += (sender as Button)?.Content?.ToString();
+//                InputTextBox.Text += (sender as Button)?.Content?.ToString();
+                if (InputTextBox.CaretIndex < InputTextBox.Text?.Length)
+                {
+                    InputTextBox.Text = InputTextBox.Text?.Insert(InputTextBox.CaretIndex, (sender as Button)?.Content?.ToString() ?? string.Empty);
+                }
+                else
+                {
+                    InputTextBox.Text += (sender as Button)?.Content?.ToString();
+
+                }
             }
 //            InputTextBox.Text += (sender as Button)?.Content?.ToString();
-            InputTextBox.CaretIndex = InputTextBox.Text.Length;
+            if (InputTextBox.CaretIndex < InputTextBox.Text?.Length)
+            {
+                ChangeCaretIndexPosRelativeToItself(1);
+            }
+            else
+            {
+                ChangeCaretIndexPosToEndOfInputText(0);
+            }
         }
 
         private void Button_OnClickBackSpace(object? sender, RoutedEventArgs e)
         {
             if (InputTextBox.Text?.Length > 0)
             {
-                InputTextBox.Text = InputTextBox.Text?.Remove(InputTextBox.Text.Length - 1);
+                if (InputTextBox.CaretIndex > 0)
+                {
+                    InputTextBox.Text = InputTextBox.Text?.Remove(InputTextBox.CaretIndex - 1, 1);
+                }
+                if (InputTextBox.Text?.Length > InputTextBox.CaretIndex)
+                {
+                    InputTextBox.CaretIndex -= 1;
+                }
             }
         }
 
+        //ToDo: Regex Mod or multivariable mod
         private void Button_OnClickMod(object? sender, RoutedEventArgs e)
         {
             InputTextBox.Focus();
-            InputTextBox.Text += " " + (sender as Button)?.Tag?.ToString();
-            InputTextBox.CaretIndex = InputTextBox.Text.Length - 1;
+//          Adds mod() at the CaretIndex
+            InputTextBox.Text = InputTextBox.Text?.Insert(InputTextBox.CaretIndex, $"{(char)215}" + (sender as Button)?.Tag?.ToString());
+//          Adds mod() at the end of the InputTextBox.Text
+//          InputTextBox.Text += " " + (sender as Button)?.Tag?.ToString();
+            ChangeCaretIndexPosRelativeToItself(5);
         }
 
-        private string ReplaceUnicodeOps(string InputText)
+        private string ReplaceUnicodeOps(string inputText)
         {
             Regex sqrtRegex = new Regex(@"\*?\u221a(\((\d+)\)|\d+)");
-            MatchCollection sqrtMatches = sqrtRegex.Matches(InputText);
+            MatchCollection sqrtMatches = sqrtRegex.Matches(inputText);
             foreach (Match i in sqrtMatches)
             {
                 string? replaceString = "";
@@ -77,7 +123,7 @@ namespace Calculator
                     j++;
                 }
 
-                if (InputText[0] != '\u221a')
+                if (inputText[0] != '\u221a')
                 {
                     replaceString = $"*Sqrt({groupCollection[^j]})";
                 }
@@ -86,19 +132,21 @@ namespace Calculator
                     replaceString = $"Sqrt({groupCollection[^j]})";
                 }
 
-                InputText = InputText.Replace(i.ToString(), replaceString);
-                Console.WriteLine(i);
+                inputText = inputText.Replace(i.ToString(), replaceString);
+                Console.Write(i);
             }
-            Console.WriteLine(InputText);
-            foreach (char i in InputText)
+            // Pi
+            //
+            Console.Write($"{inputText} => ");
+            foreach (char i in inputText)
             {
-                if (UnicodeOpsMap.TryGetValue(i, out var value))
+                if (_unicodeOpsMap.TryGetValue(i, out var value))
                 {
-                    InputText = InputText.Replace(i.ToString(), value);
+                    inputText = inputText.Replace(i.ToString(), value);
                 }
             }
-            Console.WriteLine(InputText);
-            return InputText;
+            Console.WriteLine(inputText);
+            return inputText;
         }
 
         private void CalculateButton_OnClick(object? sender, RoutedEventArgs e)
@@ -107,6 +155,7 @@ namespace Calculator
             {
                 string evalString = ReplaceUnicodeOps(InputTextBox.Text);
                 Expression expression = new Expression(evalString);
+                // ToDo: Regex mod or multivariable mod
                 expression.EvaluateFunction += delegate(string name, FunctionArgs args)
                 {
                     if (name == "mod")
@@ -115,12 +164,21 @@ namespace Calculator
                         args.Result = (int)args.Parameters[0].Evaluate() % (int)args.Parameters[1].Evaluate();
                     }
                 };
+                expression.EvaluateParameter += delegate(string pi, ParameterArgs args)
+                {
+                    if (pi == "Pi")
+                    {
+                        args.Result = Double.Pi;
+                    }
+                };
                 try
                 {
                     InputTextBox.Text = expression.Evaluate().ToString();
+                    ChangeCaretIndexPosToEndOfInputText(0);
                 } catch (NCalc.EvaluationException err)
                 {
                     MalformedInput.IsVisible = true;
+                    Console.WriteLine($"Caught a fish: {err}\n");
                 }
             }
         }
