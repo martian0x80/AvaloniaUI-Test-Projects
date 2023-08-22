@@ -13,7 +13,7 @@ namespace Calculator
     {
         private readonly Dictionary<char, string> _unicodeOpsMap = new Dictionary<char, string>()
         {
-            {(char)960, "[Pi]"},
+            {(char)960, "Pi"},
             {(char)247, "/"},
             {(char)215, "*"},
             {(char)178, "**2"},
