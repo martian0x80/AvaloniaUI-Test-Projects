@@ -27,8 +27,8 @@
 
 
   <ItemGroup>
-    <None Remove="assets\backspace.png" />
     <AvaloniaResource Include="assets\backspace.png" />
+    <AvaloniaResource Include="assets\warning-16.png" />
   </ItemGroup>
 
 

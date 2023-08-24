@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -17,6 +18,8 @@ public partial class MainWindow : Window
         { (char)215, "*" },
         { (char)178, "**2" }
     };
+
+    private FixedQueue<KeyValuePair<string?, string?>> _historyResultBox = new FixedQueue<KeyValuePair<string?, string?>>(3);
 
     public MainWindow()
     {
@@ -137,7 +140,7 @@ public partial class MainWindow : Window
             }
         }
 
-//              Mod
+//          Mod
 
         var modRegex =
             new Regex(
@@ -157,15 +160,22 @@ public partial class MainWindow : Window
 
         // Unicode to common operators
         Console.Write($"{inputText} => ");
+        var j = 'a';
         foreach (var i in inputText)
+        {
             if (_unicodeOpsMap.TryGetValue(i, out var value))
             {
-                if (inputText[0] != (char)960 && i == (char)960)
-                    inputText = inputText.Replace(i.ToString(), "*" + value);
+                if (inputText[0] != (char)960 && i == (char)960 && !new[] {'(', '\u221a'}.Contains(j))
+                    inputText = inputText.Replace(i.ToString(), "*" + $"({value})");
                 else
-                    inputText = inputText.Replace(i.ToString(), value);
+                    inputText = inputText.Replace(i.ToString(), $"{value}");
             }
+            
+        }
 
+        inputText = inputText.Replace("(*", "(");
+        inputText = inputText.Replace("\u221a*", "\u221a");
+        
         Console.WriteLine(inputText);
         return inputText;
     }
@@ -173,8 +183,17 @@ public partial class MainWindow : Window
     private void CalculateButton_OnClick(object? sender, RoutedEventArgs e)
     {
         if (InputTextBox.Text?.Length > 0)
-        {
+        {   
+            // The first run adds parenthesis to Pi or \d+ (and converts that to Sqrt in case of \d+)
             var evalString = ReplaceUnicodeOps(InputTextBox.Text);
+            /*
+            /* The second run checks for non-ascii characters and the case when the parameters are parsed but not the full
+            /* regex match, this is a consequence of my inability to make the sqrtRegex match \u221aPi directly, but it takes
+            /* the second run to read the parenthesis introduced in first step
+            */
+            evalString = evalString.Length != System.Text.Encoding.UTF8.GetByteCount(evalString)
+                ? ReplaceUnicodeOps(evalString)
+                : evalString;
             var expression = new Expression(evalString);
 
             expression.EvaluateFunction += delegate(string name, FunctionArgs args)
@@ -187,17 +206,44 @@ public partial class MainWindow : Window
             {
                 if (pi == "Pi") args.Result = double.Pi;
             };
+            bool successFlag = true;
+            string InputTextBoxTextPreserved = InputTextBox.Text;
+            string? result = "";
             try
             {
-                InputTextBox.Text = expression.Evaluate().ToString();
+                result = expression.Evaluate().ToString();
+                InputTextBox.Text = result;
                 ChangeCaretIndexPosToEndOfInputText();
+                successFlag = true;
             }
             catch (Exception err)
             {
                 MalformedInput.IsVisible = true;
                 Console.WriteLine($"Caught a fish: {err.Message}\nSource:: {err.Source}\n");
+                successFlag = false;
+            }
+            finally
+            {
+                if (successFlag)
+                {
+                    _historyResultBox.Enqueue(KeyValuePair.Create<string?, string?>(InputTextBoxTextPreserved, result!));
+
+                    HistoryBox3.Text = _historyResultBox.Peek().Key;
+                    ResultBox3.Text = _historyResultBox.Peek().Value;
+                    
+                    var queueArr = _historyResultBox.ToArray();
+
+                    HistoryBox2.Text = queueArr.ElementAtOrDefault(1).Key ?? String.Empty;
+                    ResultBox2.Text = queueArr.ElementAtOrDefault(1).Value ?? String.Empty;
+
+                    HistoryBox1.Text = queueArr.ElementAtOrDefault(2).Key ?? String.Empty;
+                    ResultBox1.Text = queueArr.ElementAtOrDefault(2).Value ?? String.Empty;
+                    
+                }
             }
         }
+        
+        
     }
 
 
@@ -205,4 +251,25 @@ public partial class MainWindow : Window
     {
         InputTextBox.Text = "";
     }
+}
+
+class FixedQueue<T> : Queue<T>
+{
+    public int Limit { get; set; }
+
+    public FixedQueue(int limit) : base(limit)
+    {
+        Limit = limit;
+    }
+
+    public new void Enqueue(T item)
+    {
+        while (Count >= Limit)
+        {
+            base.Dequeue();
+        }
+
+        base.Enqueue(item);
+    }
+    
 }

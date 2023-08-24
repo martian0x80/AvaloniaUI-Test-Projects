@@ -31,24 +31,53 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
-                <TextBox Text="sdhjjhvjhvj" Name="ResultBox3"
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                <TextBox Text="" Name="HistoryBox3"
                          FontSize="23"
                          VerticalAlignment="Center"
                          Padding="10"
+                         BorderThickness="0"
+                         Focusable="False"
                          IsReadOnly="True"/>
-                <TextBox Text="sdhjjhvjhvj" Name="ResultBox2"
+                <TextBox Text="" Name="HistoryBox2"
                          FontSize="23"
                          VerticalAlignment="Center"
                          Padding="10"
+                         Focusable="False"
+                         BorderThickness="0"
                          IsReadOnly="True"/>
-                <TextBox Text="sdhjjhvjhvj" Name="ResultBox1"
+                <TextBox Text="" Name="HistoryBox1"
                          FontSize="23"
                          VerticalAlignment="Center"
                          Padding="10"
+                         Focusable="False"
+                         BorderThickness="0, 0, 0, 1"
                          IsReadOnly="True"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
+        <StackPanel Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2">
+                <TextBox Text="" Name="ResultBox3"
+                         FontSize="23"
+                         VerticalAlignment="Center"
+                         Padding="10"
+                         BorderThickness="0"
+                         Focusable="False"
+                         IsReadOnly="True"/>
+                <TextBox Text="" Name="ResultBox2"
+                         FontSize="23"
+                         VerticalAlignment="Center"
+                         Padding="10"
+                         BorderThickness="0"
+                         Focusable="False"
+                         IsReadOnly="True"/>
+                <TextBox Text="" Name="ResultBox1"
+                         FontSize="23"
+                         VerticalAlignment="Center"
+                         Padding="10"
+                         Focusable="False"
+                         BorderThickness="0, 0, 0, 1"
+                         IsReadOnly="True"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Vertical">
                 <TextBox Name="InputTextBox"
                                FontSize="25"
                                VerticalAlignment="Center"
@@ -62,13 +91,16 @@
                                Foreground="White"
                                />
                 <TextBlock Name="MalformedInput"
-                           Text="Malformed Input"
                            TextAlignment="End"
                            Margin="10,-1"
                            IsVisible="False"
-                           Foreground="Red"
                            FontSize="15"
-                           />
+                           >
+                        <StackPanel Orientation="Horizontal">
+                                <Image Source="assets/warning-16.png" Stretch="Uniform"/>
+                                <TextBlock Foreground="Red" Text="Malformed Input"/>
+                        </StackPanel>
+                </TextBlock>
         </StackPanel>
        <Button Grid.Row="2" Grid.Column="0" Name="BackButton"
                 VerticalAlignment="Stretch"
@@ -87,7 +119,7 @@
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 FontSize="20"
-                BorderThickness="10"
+                BorderThickness="5"
                 Click="Button_OnClick"/>
         <Button Grid.Row="2" Grid.Column="2" Content=")"
                 VerticalAlignment="Stretch"
@@ -237,6 +269,7 @@
                 VerticalContentAlignment="Center"
                 FontSize="20"
                 BorderThickness="10" 
+                KeyBindings=""
                 Click="CalculateButton_OnClick"/>
         <Button Grid.Row="6" Grid.Column="0" Content="0"
                 VerticalAlignment="Stretch"
@@ -271,55 +304,4 @@
                 BorderThickness="10" 
                 Click="Button_OnClick"/>
     </Grid>
-    <!--<Panel
-        MinHeight="200"
-        MaxHeight="250"
-        MinWidth="300"
-        MaxWidth="350">
-        <TextPresenter
-            Text="Number:"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Left"
-            Margin="0, 20, 0, 50"/>
-        <NumericUpDown
-            Name="num1"
-            Height="25"
-            Width="150"
-            ButtonSpinnerLocation="Right"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Margin="0, 0, 0, 70"
-            ValueChanged="Num_OnValueChanged"
-        />
-        <TextPresenter
-            Text="Number:"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Right"
-            Margin="0, 20, 90, 50"/>
-        <NumericUpDown
-            Name="num2"
-            Height="25"
-            Width="150"
-            ButtonSpinnerLocation="Right"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Margin="0, 0, 0, 70"
-            ValueChanged="Num_OnValueChanged"
-            />
-        <TextBlock
-            Name="Answer"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Bottom"
-            Height="50"
-            Width="50"
-            Text="0"
-            ClipToBounds="True"
-            />
-        <Button Name="Button1" 
-                Click="Button_OnClick" 
-                CornerRadius="15" 
-                HorizontalAlignment="Stretch" 
-                HorizontalContentAlignment="Center"
-                VerticalAlignment="Bottom">Calculate</Button>
-    </Panel>-->
 </Window>
