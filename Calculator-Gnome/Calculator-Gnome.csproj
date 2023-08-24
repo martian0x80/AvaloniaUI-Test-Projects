@@ -21,18 +21,8 @@
 
 
   <ItemGroup>
-    <AvaloniaXaml Remove="assets\Resources.axaml" />
-    <AvaloniaXaml Remove="ButtonControl.axaml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <AvaloniaResource Include="assets\backspace.png" />
     <AvaloniaResource Include="assets\warning-16.png" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <Compile Remove="ButtonControl.axaml.cs" />
-  </ItemGroup>
+  
 </Project>
