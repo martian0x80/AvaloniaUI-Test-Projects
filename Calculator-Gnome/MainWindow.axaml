@@ -101,14 +101,14 @@
                                 <TextBlock Foreground="Red" Text="Malformed Input"/>
                         </StackPanel>
                 </TextBlock>
-        </StackPanel>
+       </StackPanel>
        <Button Grid.Row="2" Grid.Column="0" Name="BackButton"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 FontSize="25"
-                BorderThickness="5"
+                BorderThickness="10"
                 CornerRadius="12"
                 Content="{StaticResource Backspace}"
                 Click="Button_OnClickBackSpace"
