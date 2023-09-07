@@ -32,50 +32,39 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                <TextBox Text="" Name="HistoryBox3"
-                         FontSize="23"
-                         VerticalAlignment="Center"
-                         Padding="10"
-                         BorderThickness="0"
-                         Focusable="False"
-                         IsReadOnly="True"/>
-                <TextBox Text="" Name="HistoryBox2"
-                         FontSize="23"
-                         VerticalAlignment="Center"
-                         Padding="10"
-                         Focusable="False"
-                         BorderThickness="0"
-                         IsReadOnly="True"/>
-                <TextBox Text="" Name="HistoryBox1"
-                         FontSize="23"
-                         VerticalAlignment="Center"
-                         Padding="10"
-                         Focusable="False"
-                         BorderThickness="0, 0, 0, 1"
-                         IsReadOnly="True"/>
+                <StackPanel.Styles>
+                        <Style Selector="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="FontSize" Value="23"/>
+                                <Setter Property="Text" Value=""/>
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="IsReadOnly" Value="True"/>
+                        </Style>
+                </StackPanel.Styles>
+                <TextBox Name="HistoryBox3"
+                         />
+                <TextBox Name="HistoryBox2"
+                />
+                <TextBox Name="HistoryBox1"
+                />
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2">
-                <TextBox Text="" Name="ResultBox3"
-                         FontSize="23"
-                         VerticalAlignment="Center"
-                         Padding="10"
-                         BorderThickness="0"
-                         Focusable="False"
-                         IsReadOnly="True"/>
-                <TextBox Text="" Name="ResultBox2"
-                         FontSize="23"
-                         VerticalAlignment="Center"
-                         Padding="10"
-                         BorderThickness="0"
-                         Focusable="False"
-                         IsReadOnly="True"/>
-                <TextBox Text="" Name="ResultBox1"
-                         FontSize="23"
-                         VerticalAlignment="Center"
-                         Padding="10"
-                         Focusable="False"
-                         BorderThickness="0, 0, 0, 1"
-                         IsReadOnly="True"/>
+                <StackPanel.Styles>
+                        <Style Selector="TextBox">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="FontSize" Value="23"/>
+                                <Setter Property="Text" Value=""/>
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="IsReadOnly" Value="True"/>
+                        </Style>
+                </StackPanel.Styles>
+                <TextBox Name="ResultBox3"/>
+                <TextBox Name="ResultBox2"/>
+                <TextBox Name="ResultBox1"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Vertical">
                 <TextBox Name="InputTextBox"
@@ -102,230 +91,74 @@
                         </StackPanel>
                 </TextBlock>
        </StackPanel>
+        <Grid.Styles>
+                <Style Selector="Button">
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="CornerRadius" Value="12"/>
+                        <Setter Property="BorderThickness" Value="5"/>
+                </Style>
+        </Grid.Styles>
        <Button Grid.Row="2" Grid.Column="0" Name="BackButton"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
                 BorderThickness="10"
-                CornerRadius="12"
                 Content="{StaticResource Backspace}"
                 Click="Button_OnClickBackSpace"
                 DoubleTapped="BackButton_OnDoubleTapped"
                  />
        <Button Grid.Row="2" Grid.Column="1" Content="("
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"
                 />
        <Button Grid.Row="2" Grid.Column="2" Content=")"
-               VerticalAlignment="Stretch"
-               HorizontalAlignment="Stretch"
-               HorizontalContentAlignment="Center"
-               VerticalContentAlignment="Center"
-               FontSize="25"
-               BorderThickness="5"
-               CornerRadius="12"
                Click="Button_OnClick"/>
         <Button Grid.Row="2" Grid.Column="3" Content="mod" Name="ModButton"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClickMod"
                 Tag=" mod "/>
         <Button Grid.Row="2" Grid.Column="4" Content="&#960;"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"
                 Tag="Pi"/>
         <Button Grid.Row="3" Grid.Column="0" Content="7"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="3" Grid.Column="1" Content="8"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="3" Grid.Column="2" Content="9"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="3" Grid.Column="3" Content="&#247;" Name="ButtonDivide"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"
                 Tag="/"/>
         <Button Grid.Row="3" Grid.Column="4" Content="&#8730;"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="4" Grid.Column="0" Content="4"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="4" Grid.Column="1" Content="5"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="4" Grid.Column="2" Content="6"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="4" Grid.Column="3" Content="&#215;" Name="ButtonMultiply"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"
                 Tag="*"/>
         <Button Grid.Row="4" Grid.Column="4" Content="x&#178;" Name="ButtonXSquare"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"
                 Tag="&#178;"/>
         <Button Grid.Row="5" Grid.Column="0" Content="1"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="5" Grid.Column="1" Content="2"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="5" Grid.Column="2" Content="3"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="5" Grid.Column="3" Content="+"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="5" Grid.Column="4" Content="=" Grid.RowSpan="2"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="CalculateButton_OnClick"/>
         <Button Grid.Row="6" Grid.Column="0" Content="0"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="6" Grid.Column="1" Content="."
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="6" Grid.Column="2" Content="%"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
         <Button Grid.Row="6" Grid.Column="3" Content="-"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                FontSize="25"
-                BorderThickness="5"
-                CornerRadius="12"
                 Click="Button_OnClick"/>
     </Grid>
 </Window>
