@@ -6,7 +6,9 @@
         MaxHeight="600" MaxWidth="450"
         MinHeight="550" MinWidth="400"
         x:Class="Calculator.MainWindow"
-        Title="Calculator">
+        Title="Calculator"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent">
 <Window.Resources>
         <Image x:Key="Backspace" Source="assets/backspace.png"></Image>
 </Window.Resources>
